@@ -7,7 +7,7 @@ public class Trader implements Serializable {
     private BankAccount bankAccount;
     private ArrayList<Stock> stocks;
     private Market market;
-    static final long setialVersionUID=1;
+    static final long serialVersionUID=1;
 
     public Trader() {
         this.bankAccount=new BankAccount();

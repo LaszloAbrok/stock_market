@@ -26,6 +26,7 @@ public class Stock implements Serializable {
         return industry;
     }
 
-
-
+    public Object getTicker() {
+        return ticker;
+    }
 }

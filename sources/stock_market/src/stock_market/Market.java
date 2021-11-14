@@ -12,7 +12,11 @@ public class Market {
     }
 
     public void transferToTrader(Stock s, double amount){
-        
+
+    }
+
+    public Stock[] getPortfolio(){
+        return (Stock[]) stocks.toArray();
     }
 
 }
