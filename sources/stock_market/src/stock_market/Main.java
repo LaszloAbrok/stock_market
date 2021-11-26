@@ -1,6 +1,7 @@
 package stock_market;
 
 import javax.swing.*;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,24 @@ public class Main {
         StockData stockData=new StockData(stocks);
         /*MarketFrame mf=new MarketFrame(stockData);
         mf.setVisible(true);*/
-        MenuFrame mf=new MenuFrame(stockData);
-        mf.setVisible(true);
+
+
+        //MenuFrame mf=new MenuFrame(stockData);
+        //mf.setVisible(true);
+
+        News n1=new News("TECH","Global chip shortage around the world.",1.56,2);
+        News n2=new News("OIL AND GAS","Oil tower on the Northern seas demolished by storm.", -2.01,3);
+        News n3=new News("FOOD", "McDonald's and BurgerKing faces charges of making too unhealthy food.", -3.19,8);
+
+        //StockMarketSystem sms=new StockMarketSystem();
+        //sms.debugData();
+        Stock s=new Stock("aapl",Industry.Tech,2.0);
+        s.addEffectingNews(n1);
+        s.addEffectingNews(n2);
+        s.addEffectingNews(n3);
+        s.upDate();
+        s.upDate();
+        s.upDate();
+        s.upDate();
     }
 }

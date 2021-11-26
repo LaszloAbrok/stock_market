@@ -18,6 +18,10 @@ public class Trader implements Serializable {
         return bankAccount.getBalance();
     }
 
+    public void setTraderBalance(double d){
+        bankAccount.setBalance(d);
+    }
+
     public Stock[] getPortfolio(){
         return (Stock[]) stocks.toArray();
     }

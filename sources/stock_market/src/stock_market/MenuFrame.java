@@ -24,7 +24,6 @@ public class MenuFrame extends JFrame {
         panel.add(loadButton,BorderLayout.EAST);
 
         super.add(panel);
-
         super.pack();
         super.setTitle("Stock Market");
         super.setSize(800,600);
