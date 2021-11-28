@@ -50,7 +50,7 @@ public class News implements Serializable {
 
     @Override
     public String toString(){
-        return type+" "+" "+text+" " + " "+baseRate;
+        return type+" "+" "+text+" " + " "+baseRate+"\n";
     }
 
     public void decreaseTime(){

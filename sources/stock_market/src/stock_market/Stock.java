@@ -2,6 +2,8 @@ package stock_market;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Objects;
 
 public class Stock implements Serializable {
     private String ticker;
@@ -20,20 +22,26 @@ public class Stock implements Serializable {
     }
 
     public void upDate(){
+       /*debug*/  System.out.println("Effecting news on "+ ticker);
+        for(int i=0; i<effectingNews.size(); i++){
+            double newPrice=getPrice()+(1+effectingNews.get(i).getBaseRate());
+            setPrice(newPrice);
+            effectingNews.get(i).decreaseTime();
 
-        for(News n: effectingNews){
-            setPrice(getPrice()+n.getBaseRate());
-            n.decreaseTime();
-        }
-        setPrice(getPrice()+Math.random()+10);
-        System.out.println(getTicker()+" debug: currentPrice: "+getPrice()+"\n ***");
-        for(News n: effectingNews){
-            System.out.println(n.getType()+" "+" "+n.getText()+" "+" "+n.getTime());
+            /*debug*/ System.out.println(effectingNews.get(i).toString());
 
+            if(effectingNews.get(i).getTime()==0){
+
+                /*debug*/ System.out.println("Removing: "+effectingNews.get(i).toString());
+
+                effectingNews.remove(i);
+                /*debug*/ System.out.println("removed");}
         }
+        System.out.println("new price: "+ price);
     }
 
     public void addEffectingNews(News n){
+        if(n.getType().equals(industry.toString()))
         effectingNews.add(n);
     }
 
@@ -52,5 +60,9 @@ public class Stock implements Serializable {
 
     public Object getTicker() {
         return ticker;
+    }
+
+    public ArrayList<News> getActiveNews(){
+        return effectingNews;
     }
 }

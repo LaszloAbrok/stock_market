@@ -2,9 +2,14 @@ package stock_market;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class NewsStore {
     private ArrayList<News> news;
+
+    public NewsStore(){
+        news=new ArrayList<News>();
+    }
 
     public void listNews() {
         for (News n : news) {
@@ -39,4 +44,17 @@ public class NewsStore {
             ex.printStackTrace();
         }
     }
+
+    public void add(News n){
+        news.add(n);
+    }
+
+    public News popRandom(){
+        Random rand=new Random();
+        int rand_idx= rand.nextInt(news.size());
+        News ret=news.get(rand_idx);
+        System.out.println(ret.toString());
+        return ret;
+    }
+
 }

@@ -33,6 +33,8 @@ public class Market {
         return marketTime.getDay();
     }
 
-
+    public ArrayList<Stock> getStocks(){
+        return stocks;
+    }
 
 }

@@ -9,8 +9,9 @@ public class Trader implements Serializable {
     private Market market;
     static final long serialVersionUID=1;
 
-    public Trader() {
+    public Trader(double startingBalance) {
         this.bankAccount=new BankAccount();
+        bankAccount.setBalance(startingBalance);
         this.stocks=new ArrayList<>();
     }
 

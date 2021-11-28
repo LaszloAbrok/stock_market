@@ -35,19 +35,26 @@ public class Main {
         //MenuFrame mf=new MenuFrame(stockData);
         //mf.setVisible(true);
 
-        News n1=new News("TECH","Global chip shortage around the world.",1.56,2);
-        News n2=new News("OIL AND GAS","Oil tower on the Northern seas demolished by storm.", -2.01,3);
-        News n3=new News("FOOD", "McDonald's and BurgerKing faces charges of making too unhealthy food.", -3.19,8);
+        News n1=new News("Tech","Global chip shortage around the world.",0.56,2);
+        News n2=new News("OIL AND GAS","Oil tower on the Northern seas demolished by storm.", -0.01,2);
+        News n3=new News("FOOD", "McDonald's and BurgerKing faces charges of making too unhealthy food.", -1.19,3);
 
         //StockMarketSystem sms=new StockMarketSystem();
         //sms.debugData();
-        Stock s=new Stock("aapl",Industry.Tech,2.0);
+
+        /*Stock s=new Stock("aapl",Industry.Tech,2.0);
         s.addEffectingNews(n1);
         s.addEffectingNews(n2);
         s.addEffectingNews(n3);
         s.upDate();
         s.upDate();
         s.upDate();
-        s.upDate();
+        s.upDate();*/
+
+        //System.out.println(s.getIndustry().toString());
+
+        StockMarketSystem sms=new StockMarketSystem();
+        MarketFrame mf=new MarketFrame(sms);
+        mf.setVisible(true);
     }
 }

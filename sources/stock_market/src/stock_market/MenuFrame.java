@@ -14,7 +14,7 @@ public class MenuFrame extends JFrame {
         this.loadButton=new JButton("Load simulation");
         this.panel=new JPanel();
 
-        newSimulationButton.addActionListener(ae-> {MarketFrame mf=new MarketFrame(stockData); mf.setVisible(true); dispose();});
+        newSimulationButton.addActionListener(ae-> {MarketFrame mf=new MarketFrame(null); mf.setVisible(true); dispose();});
 
         JLabel label=new JLabel();
         label.setText("Stock Market");

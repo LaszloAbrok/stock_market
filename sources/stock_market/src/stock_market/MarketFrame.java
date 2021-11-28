@@ -1,26 +1,42 @@
 package stock_market;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class MarketFrame extends JFrame {
     private Market market;
     private JTable stockTable;
     private StockData stockData;
-    private Trader trader;
+    //private Trader trader;
+    private StockMarketSystem marketSystem;
 
-    public MarketFrame(StockData stockData){
+    public MarketFrame(StockMarketSystem sms) {
 
-        trader=new Trader();
-        trader.setTraderBalance(500);
+        //trader=new Trader();
+        //trader.setTraderBalance(500);
 
         Market market=new Market();
+        marketSystem=sms;
 
        // this.market=market;
-        this.stockData=stockData;
+        this.stockData=new StockData(sms.getStocksList());
         stockTable=new JTable();
         stockTable.setModel(stockData);
+        TableRowSorter<TableModel> sorter= new TableRowSorter<TableModel>(stockTable.getModel());
+        stockTable.setRowSorter(sorter);
+
+        //TableCellRenderer tableCellRenderer;
+        //tableCellRenderer = stockTable.getDefaultRenderer(JButton.class);
+        //stockTable.setDefaultRenderer(JButton.class, new StockDataButton(tableCellRenderer));
+        ListSelectionListener lsl=new StockListSelection();
+        stockTable.getSelectionModel().addListSelectionListener(lsl);
+
 
         stockTable.setFillsViewportHeight(true);
         JScrollPane scrollpane=new JScrollPane(stockTable);
@@ -32,13 +48,21 @@ public class MarketFrame extends JFrame {
 
         //market data
         JPanel pane1=new JPanel();
-        pane1.add(label1);
+        JTextArea newsArea=new JTextArea();
+        newsArea.setText("Alma");
+        newsArea.setEditable(false);
+        pane1.add(newsArea);
+
+
+        //pane1.add(label1);
+
+
         //interactive panel
         JPanel pane2=new JPanel();
         pane2.add(label2);
         //trader data
         JPanel pane3=new JPanel();
-        JLabel balance=new JLabel(trader.getTraderBalance()+" $");
+        JLabel balance=new JLabel(marketSystem.getTrader().getTraderBalance()+" $");
         //balance.setText();
         balance.setForeground(Color.RED);
         pane3.add(balance,BorderLayout.EAST);
@@ -53,9 +77,13 @@ public class MarketFrame extends JFrame {
         nextDayButton.setBackground(Color.ORANGE);
         JLabel timeLabel=new JLabel("Day "+market.getCurrentTime());
 
-        nextDayButton.addActionListener(ae->{market.nextDayOnMarket();
-            timeLabel.setText("Day "+ market.getCurrentTime());});
-
+        nextDayButton.addActionListener(ae->{
+            marketSystem.upDate();
+            timeLabel.setText("Day "+marketSystem.getTime());
+            stockData.UpdateData(marketSystem.getStocksList());
+            balance.setText(marketSystem.getTrader().getTraderBalance()+" $");
+            newsArea.setText(marketSystem.getActiveNews().toString());
+        });
 
         timePane.add(timeLabel,BorderLayout.CENTER);
         timePane.add(nextDayButton,BorderLayout.EAST);
@@ -70,8 +98,15 @@ public class MarketFrame extends JFrame {
         super.setSize(800,600);
     }
 
-
-
-
-
 }
+
+class StockListSelection implements ListSelectionListener{
+
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        System.out.println("this is a test");
+    }
+}
+
+
+
